@@ -18,11 +18,21 @@
         <a href="book_ticket.html">Book ticket</a>
         <a href="about_us.html">About us</a>
     </nav>
-    <div>
-
+    <div id="main_field">
+        Put something here later
     </div>
     <footer>
 
     </footer>
+    <script>
+        const main_field = document.getElementById("main_field");
+        const new_header = document.createElement("h1");
+        const headerContent = document.createTextNode(
+        'Develop. Preview. Ship. 🚀',
+        );
+        new_header.appendChild(headerContent);
+        main_field.appendChild(new_header);
+
+    </script>
 </body>
 </html>

@@ -1,0 +1,68 @@
+header {
+    font-size: xx-large;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #ccc;
+  background-color: #111;
+  font-family: 'Open Sans', sans-serif;
+}
+
+@keyframes button-hover-end {
+  100% {
+    border: 1px solid #fff;
+    background-color: transparent;
+    color: #fff;
+  }
+}
+
+.button-hover {
+  animation: button-hover-end 500ms both;
+}
+
+.button-blog {
+  background-color: #667EEA;
+}
+
+.button-default {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: lowercase;
+  color: #fff;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.button-cancel {
+  background-color: #EF4444;
+}
+
+.button-purple {
+  background-color: #9333EA;
+}
+
+.button-pink {
+  background-color: #EC4899;
+}
+
+.button-lightblue {
+  background-color: #3B82F6;
+}
+
+.button-yellow {
+  color: #111827;
+  background-color: #FCD34D;
+}
+
+
+
+  
+
+  
+ 
