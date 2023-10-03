@@ -22,6 +22,7 @@ class Navbar extends HTMLElement {
     this.style.color = value; // Set the color of the element's text
   }
 
+
     connectedCallback() {
       this.innerHTML = `
             <style>
