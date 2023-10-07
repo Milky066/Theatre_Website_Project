@@ -4,8 +4,9 @@ $dbname = 'theatre_database';
 $username = 'root';
 $password = '';
 $servername = '127.0.0.1';
+$port = '3306';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername.':'.$port, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
@@ -15,7 +16,7 @@ if ($conn->connect_error) {
 $conn->query("USE $dbname");
 $query_result = $conn->query("SELECT shows.id, shows.time, shows.price, movies.title, movies.description, movies.rating, movies.image FROM shows JOIN movies ON movies.id = shows.movie_id;");
 $seat_query_result = $conn->query("SELECT bookings.show_id FROM bookings");
-$keys = ['show_id','time', 'price', 'title', 'description', 'rating','image', 'seat_booked'];
+$keys = ['show_id','time', 'price', 'title', 'description', 'rating', 'image', 'seat_booked'];
 $show_array = array();
 $booked_array = $seat_query_result->fetch_all(MYSQLI_ASSOC);
 

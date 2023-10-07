@@ -3,6 +3,7 @@ class Navbar extends HTMLElement {
     super();
     this._backgroundColor = 'red';
     this._color = '#fff'; // Use an underscore to store the color property internally
+    this._style = '';
   }
 
   get backgroundColor() {
@@ -22,13 +23,27 @@ class Navbar extends HTMLElement {
     this.style.color = value; // Set the color of the element's text
   }
 
+  get style(){
+    return this.getAttribute('style') || this._style;
+  }
+
+  set style(value){
+    this._style = value;
+    this.setAttribute('style', value); 
+  }
+
+
 
     connectedCallback() {
+
+      this._style = this.getAttribute('style');
+
       this.innerHTML = `
             <style>
             .header-navbar {
                 background-color: ${this.backgroundColor};
                 color: ${this.color};
+                ${this._style};
             }
             
             .header-navbar ul {
@@ -67,6 +82,7 @@ class Navbar extends HTMLElement {
       super();
       this._backgroundColor = 'red';
       this._color = '#fff'; // Use an underscore to store the color property internally
+      this._style = '';
     }
   
     get backgroundColor() {
@@ -85,7 +101,16 @@ class Navbar extends HTMLElement {
       this._color = value; // Set the internal property _color
       this.style.color = value; // Set the color of the element's text
     }
+    get style(){
+      return this.getAttribute('style') || this._style;
+    }
+  
+    set style(value){
+      this._style = value;
+      this.setAttribute('style', value); 
+    }
     connectedCallback() {
+      this._style = this.getAttribute('style');
       this.innerHTML = `
       <style>
       footer {
@@ -93,6 +118,7 @@ class Navbar extends HTMLElement {
           color: ${this.color};
           padding: 20px;
           text-align: center;
+          ${this._style};
       }
       ul {
         list-style: none;
