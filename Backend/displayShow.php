@@ -68,7 +68,7 @@
     $query_result -> free_result();
     $seat_query_result -> free_result();
 
-
+    // array here
     foreach($show_array as $row){
 
       $date_time = new DateTime($row['time']);
