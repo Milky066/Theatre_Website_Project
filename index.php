@@ -11,15 +11,15 @@
   <header>
     <nav class="header-navbar">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/">About</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="">Home</a></li>
+          <!-- Put loging and register on the right end!!!!!! -->
+          <li><a href="login.html">Login</a></li>
+          <li><a href="register.html">Register</a></li>
         </ul>
     </nav>
   </header>
   
-
+  <main>
   <div id="movie-card-container" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
     <!-- To be populated by script -->
     <?php
@@ -27,23 +27,23 @@
       FillShowCards();
     ?>
   </div>
-  
+  </main>
   <!-- <theatre-footer background-color = "black"></theatre-footer> -->
 
   <footer>
-          <div class="footer-container">
-              <div>
-                  <p>&copy; JhaMil Theatre</p>
-              </div>
-              <div>
-                  <ul>
-                      <li><a href="#">Privacy Policy</a></li>
-                      <li><a href="#">Terms of Service</a></li>
-                      <li><a href="#">Contact Us</a></li>
-                  </ul>
-              </div>
-          </div>
-    </footer>
+    <div class="footer-container">
+        <div>
+            <p>&copy; JhaMil Theatre</p>
+        </div>
+        <div>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+    </div>
+  </footer>
 
   
 </body>
