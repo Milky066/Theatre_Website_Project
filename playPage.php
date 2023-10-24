@@ -46,8 +46,10 @@
                     ?>
                 </div>
                 <div>
-                    <form action="confirmPage.php" method="post">
-                    
+                    <form id="hidden-form" action="confirmPage.php" method="post">
+                        <!-- Populate by hidden input elements by the JS below -->
+                        <!-- <input type="checkbox" name="check111"/> -->
+                        <!-- <input type="submit" value="Proceed"/> -->
                     </form>
                 </div>
             </div>
@@ -108,9 +110,9 @@
         document.getElementById('myForm').submit();
     }
 
-    function generateSeats(rowNum = 5, rowCap = 10){
-        const seatContainer = document.getElementById("seat-container");
-        
+    function generateSeats(rowNum = 5, rowCap = 10, hiddenFormId = "hidden-form", seatContainerId = "seat-container"){
+        const seatContainer = document.getElementById(seatContainerId);
+        const hiddenForm = document.getElementById(hiddenFormId);
         for(let row = 0; row < rowNum; row++){
             const rowContainer = document.createElement("tr");
             const rowHeader = document.createElement("td");
@@ -123,20 +125,24 @@
                 const cell = document.createElement("td");
                 const seat = document.createElement("input");
                 seat.setAttribute("type", "checkbox");
-                seat.setAttribute("id", `checkbox-row${row}-seat${seatNum}`);
-                seat.setAttribute("name", `checkbox-row${row}-seat${seatNum}`)
+                seat.setAttribute("id", `external-checkbox-${String.fromCharCode(row + asciiOffset)}${seatNum}`);
+                seat.setAttribute("name", `external-checkbox-${String.fromCharCode(row + asciiOffset)}${seatNum}`)
                 seat.setAttribute("class", "seat-checkbox");
-
+                seat.setAttribute("onchange", 'updateInternalInput(this)');
                 const label = document.createElement("label");
                 label.setAttribute("for", seat.id);
                 const span = document.createElement("span");
 
                 label.appendChild(span);
-                // rowContainer.appendChild(seat);
-                // rowContainer.appendChild(label);
                 cell.appendChild(seat)
                 cell.appendChild(label)
                 rowContainer.appendChild(cell);
+
+                const hiddenInput = document.createElement("input");
+                hiddenInput.setAttribute("id", `hidden-checkbox-${String.fromCharCode(row + asciiOffset)}${seatNum}`);
+                hiddenInput.setAttribute("name", `hidden-checkbox-${String.fromCharCode(row + asciiOffset)}${seatNum}`)
+                hiddenInput.style = "display: none;";
+                hiddenForm.appendChild(hiddenInput);
             }
             seatContainer.appendChild(rowContainer);
         }
@@ -150,6 +156,21 @@
             seatNumRow.appendChild(cell);
         }
         seatContainer.appendChild(seatNumRow);
+        const submitButton = document.createElement("input");
+        submitButton.setAttribute("type", "submit");
+        submitButton.setAttribute("value", "Proceed");
+        hiddenForm.appendChild(submitButton);
+    }
+
+    function updateInternalInput(element){
+        const internalId = /-[A-Z][0-9]/;
+        const id = "hidden-checkbox"+internalId.exec(element.id)[0];
+
+        const hiddenInputElement = document.getElementById(id);
+        hiddenInputElement.checked = element.checked;
+        hiddenInputElement.checked? hiddenInputElement.value = "on":hiddenInputElement.value = "off";
+        
+        // console.log(hiddenInputElement.checked);
     }
 
     function rowToLetter(row){
