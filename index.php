@@ -2,51 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <script type="module" src="Components/navigation.js"></script>
-  <!-- <script type="module" src="Components/movieCard.js"></script> -->
+  <link href="Styles/global.css" rel="stylesheet"/>
   <title>Home</title>
 </head>
 <body>
   <!-- Include the navbar component -->
   <h1>JhaMil Theatre</h1>
-  <theatre-header background-color = "black"></theatre-header>
+  <header>
+    <nav class="header-navbar">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/">About</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+  </header>
+  
+
   <div id="movie-card-container" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
     <!-- To be populated by script -->
     <?php
-      include 'Utils/indexOperations.php';
+      include 'Backend/indexOperations.php';
       FillShowCards();
     ?>
   </div>
   
-  <theatre-footer background-color = "black"></theatre-footer>
+  <!-- <theatre-footer background-color = "black"></theatre-footer> -->
+
+  <footer>
+          <div class="footer-container">
+              <div>
+                  <p>&copy; JhaMil Theatre</p>
+              </div>
+              <div>
+                  <ul>
+                      <li><a href="#">Privacy Policy</a></li>
+                      <li><a href="#">Terms of Service</a></li>
+                      <li><a href="#">Contact Us</a></li>
+                  </ul>
+              </div>
+          </div>
+    </footer>
 
   
 </body>
-<script>
-
-  // fetch('./Backend/getBookings.php')
-  // .then(response => {return response.json();})
-  // .then(data => {
-  //   const movieCardContainer = document.getElementById('movie-card-container');
-  //   const size = 200;
-  //   const theatreCapacity = 230;
-  //   console.log(data);
-  //   data.forEach(show => {
-  //     const movieCard = document.createElement('movie-card');
-
-  //     movieCard.setAttribute('src', show.image);
-  //     movieCard.setAttribute('alt', show.title);
-  //     movieCard.setAttribute('size', size);
-  //     movieCard.setAttribute('showtime', show.time)
-  //     movieCard.setAttribute('price', show.price);
-  //     movieCard.setAttribute('seat', theatreCapacity - show.seat_booked);
-  //     movieCardContainer.appendChild(movieCard);
-  //   });
-  // })
-  // .catch(error => console.error('Error fetching show data:', error));
-
-
-</script>
 
 
 </html>

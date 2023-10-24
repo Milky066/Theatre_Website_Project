@@ -61,6 +61,50 @@ body {
 }
 
 
+.header-navbar {
+  background-color: black;
+  color: white;
+}
+
+.header-navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header-navbar li {
+  display: inline;
+  margin-right: 20px;
+}
+
+.header-navbar a {
+  text-decoration: none;
+  color: white;
+}
+
+footer {
+  background-color: black;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+ul {
+list-style: none;
+padding: 0;
+margin-right: 10px;
+}
+
+ul li {
+display: inline;
+}
+
+.footer-container {
+display: flex;
+margin-right: 10px;
+justify-content: space-between;
+}
+
+
 
   
 
