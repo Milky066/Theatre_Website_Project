@@ -1,21 +1,32 @@
+<?php
+    include "Backend/checkLogin.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <link href="Styles/global.css" rel="stylesheet"/>
+  <link href="Styles/movieCard.css" rel="stylesheet"/>
   <title>Home</title>
 </head>
 <body>
-  <!-- Include the navbar component -->
-  <h1>JhaMil Theatre</h1>
   <header>
     <nav class="header-navbar">
-        <ul>
-          <li><a href="">Home</a></li>
-          <!-- Put loging and register on the right end!!!!!! -->
-          <li><a href="login.html">Login</a></li>
-          <li><a href="register.html">Register</a></li>
-        </ul>
+      <div class="navbar-left-panel">
+        <a href="">JhaMil Theatre</a>
+      </div>
+      <div class="navbar-right-panel">
+        <div><a href="">Home</a></div>
+        <div><a href="login.php">Login</a></div>
+        <?php
+          if(isset($user_id)){
+            echo "<div><a href='Backend/handleLogout.php'>Logout</a></div>";
+          } else {
+            echo "<div><a href='register.php'>Register</a></div>";
+          }
+          
+        ?>
+      </div>
     </nav>
   </header>
   

@@ -90,7 +90,8 @@
       text-align: center; 
       padding-top: 1rem; 
       padding-bottom: 1rem;
-      cursor: pointer;' onclick='onClick($row[show_id])'>
+      cursor: pointer:
+    ' onclick='onClick($row[show_id])'>
       <!-- Picture -->
       <div style='margin: auto'>
       <img src='$row[image]' alt='$row[show_id]' width='auto' height='auto' style='max-width:200px; max-height:200px;'/>
@@ -121,5 +122,3 @@
       
   }
   }
-      
-?>

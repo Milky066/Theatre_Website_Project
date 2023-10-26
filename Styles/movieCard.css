@@ -1,0 +1,25 @@
+.movie-card {
+    width: 200px;
+    height: fit-content;
+    background-color: rgb(74, 74, 74);
+    margin: 15px;
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+    border: 2px solid #464646;
+    border-radius: 4px;
+    padding-top: 20px;
+}
+
+.movie-card:hover {
+    transition: 0.5s ease-in-out;
+    opacity: 50%;
+}
+
+img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px;
+}

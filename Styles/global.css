@@ -1,8 +1,26 @@
+* {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
 header {
-    font-size: xx-large;
+  font-size: xx-large;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+
+a:hover {
+  color: #1ddcd0;
+  transition: 0.5s ease-in-out;
 }
 
 body {
+  margin: 0px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #ccc;
@@ -62,25 +80,48 @@ body {
 
 
 .header-navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   background-color: black;
   color: white;
 }
 
-.header-navbar ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.navbar-right-panel {
+  display: flex;
+  flex-direction: row;
+  width: max-content;
+
 }
 
-.header-navbar li {
-  display: inline;
-  margin-right: 20px;
+.navbar-right-panel div {
+  margin-left: 4px;
+  margin-right: 4px;
+
 }
 
-.header-navbar a {
+/* .navbar-right-panel div a{
   text-decoration: none;
-  color: white;
+  color: white; 
+  cursor: pointer;
+  
+} */
+
+.navbar-left-panel {
+  width: max-content;
+  font-size: xxx-large;
+
+
 }
+
+/* .navbar-left-panel a{
+  width: max-content;
+  font-size: xxx-large;
+  text-decoration: none;
+  color: white; 
+  cursor: pointer;
+} */
 
 footer {
   background-color: black;
@@ -88,25 +129,9 @@ footer {
   padding: 20px;
   text-align: center;
 }
-ul {
-list-style: none;
-padding: 0;
-margin-right: 10px;
-}
-
-ul li {
-display: inline;
-}
 
 .footer-container {
-display: flex;
-margin-right: 10px;
-justify-content: space-between;
+  display: flex;
+  margin-right: 10px;
+  justify-content: space-between;
 }
-
-
-
-  
-
-  
- 
