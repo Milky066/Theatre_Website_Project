@@ -5,11 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>play</title>
     <link href="Styles/global.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/76896660ac.js" crossorigin="anonymous"></script>
+
 </head>
+<style>
+    .register{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        background-color:  rgb(120, 120, 120);;
+        width: 500px;
+        margin: auto;
+        color: black;
+       
+    }
+    .fb{
+        background-color: #316ff6;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        font-size: 14px;
+        cursor: pointer;
+        
+    }
+    .fb:hover{
+        background-color: #004ffb;
+    }
+    .gmail{
+        background-color: rgb(252, 178, 40);
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        font-size: 14px;
+        cursor: pointer;
+    
+    }
+
+    
+    .gmail:hover{
+        background-color: orange;
+    }
+
+    .buttons{
+        display: inline-flex;
+        justify-content: space-between;
+        flex-direction: row;
+        
+    }
+
+    input[type=text] {
+        width: 100%;
+        padding: 5px 10px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        
+    }
+    input[type=date] {
+        width: 100%;
+        padding: 5px 10px;
+        margin: 8px 0;
+        box-sizing: border-box;
+    }
+    
+    .submit{
+        display: inline-flex;
+        justify-content: space-between;
+        flex-direction: row;
+        width: 280px;
+    }
+
+    
+
+    .sub-btn{
+        background-color: white; /* Green */
+  border: none;
+  color: black;
+  padding: 5px 10px;
+  width: 100px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px; 
+border-radius: 20px; }
+
+  .sub-btn:hover{
+    background-color: red;
+  }
+  p{
+    font-size: 12px;
+  }
+
+</style>
 <body>
-    <h1>JhaMil Theatre</h1>
+   
     <header>
+        
         <nav class="header-navbar">
+           
             <ul>
             <li><a href="http://localhost/Theatre_Website_Project/">Home</a></li>
             <!-- Put loging and register on the right end!!!!!! -->
@@ -19,8 +112,25 @@
         </nav>
     </header>
     <main>
-        <div>
-            Register
+        <div class="register">
+            <h2>Welcome to JhaMil</h2>
+            <h4>SignUp with</h4>
+            <form>
+                <label>Email or Mobile:</label>
+                <input type="text" id="email/mobile" name="email/mobile" placeholder="Enter Email or Mobile number"><br>
+                <label>Password:</label>
+                <input type="text" id="pw" name="pw" placeholder="Create a password"><br>
+                <label>Birthdate:</label> <br>
+                <input type="date">
+            </form>
+                <input type="submit" class="sub-btn" value="Sign Up">
+            
+              <h5>-OR-</h5>
+            <div class="buttons">
+                <button class="fb"><i class="fa-brands fa-facebook"></i> Sign Up with Facebook</button>
+                <button class="gmail"><i class="fa-brands fa-google"></i> Sign Up with Google</button>
+            </div>
+              <p>Already have an account? Click here to <span> <a href="login.html">log in</a></span></p>
         </div>
     </main>
 </body>

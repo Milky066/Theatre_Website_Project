@@ -44,6 +44,9 @@ class Navbar extends HTMLElement {
                 background-color: ${this.backgroundColor};
                 color: ${this.color};
                 ${this._style};
+                display: flex;
+                flex-direction: columns;
+            
             }
             
             .header-navbar ul {

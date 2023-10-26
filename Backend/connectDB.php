@@ -1,7 +1,7 @@
 <?php
 
 function connectDB(){
-    $dbname = 'theatre_database';
+    $dbname = 'theater_database';
 
     $username = 'root';
     $password = '';
@@ -19,7 +19,7 @@ function connectDB(){
         header('Content-Type: application/json');
         die($jsonError);
     }
-    $conn->query("USE theatre_database");
+    $conn->query("USE theater_database");
     return $conn;
 }
 
