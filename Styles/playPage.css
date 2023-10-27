@@ -1,13 +1,14 @@
-.movie-container {
-    background-color: red;
+.movie-container{
+    background-color: black;
     display: flex;
     flex-direction: row;
     width: 100%;
     color: black;
 }
 
-.movie-container-left {
-    background-color: rgb(214, 214, 216);
+
+.movie-container-left{
+    background-color: rgba(214, 214, 216, 0);
     width: 30%;
     display: flex;
     flex-direction: column;
@@ -18,7 +19,7 @@
     background-color: rgb(120, 120, 120);
     width: 70%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
 }
 

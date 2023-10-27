@@ -51,11 +51,7 @@ include 'Backend/displayShow.php';
                     displayRating($conn, $show_id);
                     ?>
                 </div>
-                <div>
-                    <?php
-                    displayDate($conn, $show_id);
-                    ?>
-                </div>
+
                 <div>
                     <form id="hidden-form" action="confirmPage.php" method="post">
                         <!-- Populate by hidden input elements by the JS below -->
@@ -66,11 +62,19 @@ include 'Backend/displayShow.php';
             </div>
             <div class="movie-container-right">
                 <div>
-                    Title
+                    You have selected
                 </div>
                 <div>
                     <?php
                     displayDescription($conn, $show_id);
+                    ?>
+                </div>
+                <div>
+                    on
+            </div>
+            <div>
+                    <?php
+                    displayDate($conn, $show_id);
                     ?>
                 </div>
                 <div>
