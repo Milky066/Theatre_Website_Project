@@ -30,17 +30,18 @@ if ($booked_seats <= 0) {
             </div>
             <div class="navbar-right-panel">
                 <div><a href="index.php">Home</a></div>
-                <div><a href="login.php">Login</a></div>
                 <?php
                 if (isset($user_id)) {
+                    echo "<div><a href='account.php'>Account</a></div>";
                     echo "<div><a href='Backend/handleLogout.php'>Logout</a></div>";
                 } else {
+                    echo "<div><a href='login.php'>Login</a></div>";
                     echo "<div><a href='register.php'>Register</a></div>";
                 }
-
                 ?>
             </div>
         </nav>
+        <div class="separator"></div>
     </header>
 
     <main>

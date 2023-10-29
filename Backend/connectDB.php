@@ -1,6 +1,7 @@
 <?php
 
-function connectDB(){
+function connectDB()
+{
     $dbname = 'theatre_database';
 
     $username = 'root';
@@ -8,7 +9,7 @@ function connectDB(){
     $servername = '127.0.0.1';
     $port = '3306';
 
-    $conn = new mysqli($servername.':'.$port, $username, $password, $dbname);
+    $conn = new mysqli($servername . ':' . $port, $username, $password, $dbname);
 
     if ($conn->connect_error) {
         $errorResponse = array(

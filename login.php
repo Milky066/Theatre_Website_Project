@@ -8,7 +8,7 @@ include "Backend/checkLogin.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>play</title>
+    <title>Login</title>
     <link href="Styles/global.css" rel="stylesheet" />
     <link href="Styles/login.css" rel="stylesheet" />
 </head>
@@ -21,17 +21,18 @@ include "Backend/checkLogin.php";
             </div>
             <div class="navbar-right-panel">
                 <div><a href="index.php">Home</a></div>
-                <div><a href="login.php">Login</a></div>
                 <?php
                 if (isset($user_id)) {
+                    echo "<div><a href='account.php'>Account</a></div>";
                     echo "<div><a href='Backend/handleLogout.php'>Logout</a></div>";
                 } else {
+                    echo "<div><a href='login.php'>Login</a></div>";
                     echo "<div><a href='register.php'>Register</a></div>";
                 }
-
                 ?>
             </div>
         </nav>
+        <div class="separator"></div>
     </header>
     <main>
         <div class="login-container">

@@ -1,7 +1,12 @@
 <?php
 include "Backend/checkLogin.php";
-?>
 
+$error_message = isset($_GET["error"]) ? $_GET["error"] : null;
+?>
+<script>
+    const errorMessage = "<?php echo $error_message; ?>";
+    const error = errorMessage.replace(/_/g, " ");
+</script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,17 +26,18 @@ include "Backend/checkLogin.php";
             </div>
             <div class="navbar-right-panel">
                 <div><a href="index.php">Home</a></div>
-                <div><a href="login.php">Login</a></div>
                 <?php
                 if (isset($user_id)) {
+                    echo "<div><a href='account.php'>Account</a></div>";
                     echo "<div><a href='Backend/handleLogout.php'>Logout</a></div>";
                 } else {
+                    echo "<div><a href='login.php'>Login</a></div>";
                     echo "<div><a href='register.php'>Register</a></div>";
                 }
-
                 ?>
             </div>
         </nav>
+        <div class="separator"></div>
     </header>
     <main>
         <div class="register-container">
@@ -62,8 +68,6 @@ include "Backend/checkLogin.php";
                             <input type="password" id="password" name="password" placeholder="Enter password" required onchange="checkPassword()" />
                         </td>
                     </tr>
-                    <!-- TODO: Add JS logic for confirm password -->
-                    <!-- TODO: Add email confirmation once a booking has been made -->
                     <tr>
                         <th>
                             <label>Confirm Password</label>
@@ -72,19 +76,12 @@ include "Backend/checkLogin.php";
                             <input type="password" id="confirm-password" name="confirm-password" placeholder="Enter password" required onchange="checkPassword()" />
                         </td>
                     </tr>
-                    <tr>
-                        <!-- TODO: Add a button for toggling password visibility -->
-                    </tr>
+
                 </table>
+                <span><input type="checkbox" id="password-toggle" name="password-toggle" value="toggle visibility" onchange="togglePasswordVisibility(this)">Toggle visibility</input></span>
+                <div id="error-message"></div>
                 <div class="submit">
                     <input type="submit" value="Register">
-                    <?php
-                    if (isset($_GET['isWrongPassword'])) {
-                        echo "<div style='visibility:visible; color: rgb(235, 0, 0);'>Incorret Email and/or Password</div>";
-                    } else {
-                        echo "<div style='visibility:hidden; color: rgb(235, 0, 0);'>Incorret Email and/or Password</div>";
-                    }
-                    ?>
                 </div>
             </form>
         </div>
@@ -94,6 +91,13 @@ include "Backend/checkLogin.php";
     const passwordInput = document.querySelector("#password");
     const confirmPasswordInput = document.querySelector("#confirm-password");
 
+    document.addEventListener("DOMContentLoaded", updateError());
+
+    function updateError() {
+        const erroeContainer = document.getElementById("error-message");
+        erroeContainer.textContent = error;
+    }
+
     function checkPassword() {
         if (passwordInput.value === confirmPasswordInput) {
             return true;
@@ -102,8 +106,17 @@ include "Backend/checkLogin.php";
         }
     }
 
-    function togglePasswordVisibility() {
+    function togglePasswordVisibility(element) {
 
+        const password = document.getElementById("password");
+        const confirmPassword = document.getElementById("confirm-password");
+        if (element.checked) {
+            password.setAttribute("type", "text");
+            confirmPassword.setAttribute("type", "text");
+        } else {
+            password.setAttribute("type", "password");
+            confirmPassword.setAttribute("type", "password");
+        }
     }
 </script>
 

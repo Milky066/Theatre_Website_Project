@@ -8,7 +8,7 @@ function displayImage($conn, $id): void
   $image = $query_result->fetch_assoc();
   $query_result->free_result();
 
-  echo "<img src='$image[image]' alt='$image[title]' width='auto' height='auto' style='max-width:200px; max-height:200px;'/>";
+  echo "<img src='$image[image]' alt='$image[title]' width='auto' height='auto' style='max-width:200px; max-height:200px; border-radius: 10px;'/>";
 }
 
 function displayRating($conn, $id): void

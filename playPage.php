@@ -22,17 +22,18 @@ include 'Backend/displayShow.php';
             </div>
             <div class="navbar-right-panel">
                 <div><a href="index.php">Home</a></div>
-                <div><a href="login.php">Login</a></div>
                 <?php
                 if (isset($user_id)) {
+                    echo "<div><a href='account.php'>Account</a></div>";
                     echo "<div><a href='Backend/handleLogout.php'>Logout</a></div>";
                 } else {
+                    echo "<div><a href='login.php'>Login</a></div>";
                     echo "<div><a href='register.php'>Register</a></div>";
                 }
-
                 ?>
             </div>
         </nav>
+        <div class="separator"></div>
     </header>
     <?php
     $conn = connectDB();
@@ -41,7 +42,7 @@ include 'Backend/displayShow.php';
     <main>
         <div class="movie-container">
             <div class="movie-container-left">
-                <div class="movie-title">
+                <div class="movie-title-left">
                     <?php
                     displayTitle($conn, $show_id);
                     ?>
@@ -75,7 +76,7 @@ include 'Backend/displayShow.php';
                 <table>
                     <tr>
                         <th>Title</th>
-                        <td class="movie-title">
+                        <td class="movie-title-right">
                             <?php
                             displayTitle($conn, $show_id);
                             ?>
@@ -93,21 +94,21 @@ include 'Backend/displayShow.php';
                         <td></td>
                         <td>
                             <!-- Seat selection componet -->
-                            <div>
-                                <div class="screen-container">Screen</div>
-                                <table class="seat-container" id="seat-container">
-                                    <script>
-                                        const seatString = "<?php getBookedSeatString($conn, $show_id); ?>";
-                                        const seatArr = seatString.split(",");
-                                        document.addEventListener("DOMContentLoaded", function() {
 
-                                            generateSeats(seats = seatArr);
-                                            resetCheckboxes();
+                            <div class="screen-container">Screen</div>
+                            <table class="seat-container" id="seat-container">
+                                <script>
+                                    const seatString = "<?php getBookedSeatString($conn, $show_id); ?>";
+                                    const seatArr = seatString.split(",");
+                                    document.addEventListener("DOMContentLoaded", function() {
 
-                                        });
-                                    </script>
-                                </table>
-                            </div>
+                                        generateSeats(seats = seatArr);
+                                        resetCheckboxes();
+
+                                    });
+                                </script>
+                            </table>
+
                         </td>
                     </tr>
                 </table>

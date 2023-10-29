@@ -15,22 +15,26 @@ include "Backend/checkLogin.php";
   <header>
     <nav class="header-navbar">
       <div class="navbar-left-panel">
-        <a href="">JhaMil Theatre</a>
+        <a href="index.php">JhaMil Theatre</a>
       </div>
       <div class="navbar-right-panel">
-        <div><a href="">Home</a></div>
-        <div><a href="login.php">Login</a></div>
+        <div><a href="index.php">Home</a></div>
         <?php
         if (isset($user_id)) {
+          echo "<div><a href='account.php'>Account</a></div>";
           echo "<div><a href='Backend/handleLogout.php'>Logout</a></div>";
         } else {
+          echo "<div><a href='login.php'>Login</a></div>";
           echo "<div><a href='register.php'>Register</a></div>";
         }
 
         ?>
       </div>
     </nav>
+    <div class="separator"></div>
   </header>
+
+
 
   <main>
     <div id="movie-card-container" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
