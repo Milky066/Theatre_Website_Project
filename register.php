@@ -51,7 +51,7 @@ include "Backend/checkLogin.php";
                             <label>Username</label>
                         </th>
                         <td>
-                            <input type="text" id="email" name="email" placeholder="Your email" required>
+                            <input type="text" id="username" name="username" placeholder="Your email" required>
                         </td>
                     </tr>
                     <tr>
@@ -59,7 +59,7 @@ include "Backend/checkLogin.php";
                             <label>Password</label>
                         </th>
                         <td>
-                            <input type="password" id="password" name="password" placeholder="Enter password" required>
+                            <input type="password" id="password" name="password" placeholder="Enter password" required onchange="checkPassword()" />
                         </td>
                     </tr>
                     <!-- TODO: Add JS logic for confirm password -->
@@ -69,8 +69,11 @@ include "Backend/checkLogin.php";
                             <label>Confirm Password</label>
                         </th>
                         <td>
-                            <input type="password" id="password" name="password" placeholder="Enter password" required>
+                            <input type="password" id="confirm-password" name="confirm-password" placeholder="Enter password" required onchange="checkPassword()" />
                         </td>
+                    </tr>
+                    <tr>
+                        <!-- TODO: Add a button for toggling password visibility -->
                     </tr>
                 </table>
                 <div class="submit">
@@ -88,7 +91,20 @@ include "Backend/checkLogin.php";
     </main>
 </body>
 <script>
+    const passwordInput = document.querySelector("#password");
+    const confirmPasswordInput = document.querySelector("#confirm-password");
 
+    function checkPassword() {
+        if (passwordInput.value === confirmPasswordInput) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function togglePasswordVisibility() {
+
+    }
 </script>
 
 </html>

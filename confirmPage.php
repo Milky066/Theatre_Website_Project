@@ -1,5 +1,7 @@
 <?php
 include "Backend/checkLogin.php";
+include 'Backend/displayShow.php';
+include 'Backend/connectDB.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +11,7 @@ include "Backend/checkLogin.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>play</title>
     <link href="Styles/global.css" rel="stylesheet" />
-    <link href="Styles/playPage.css" rel="stylesheet" />
+    <link href="Styles/confirmPage.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -35,16 +37,48 @@ include "Backend/checkLogin.php";
 
     <main>
 
-        <div>
-            <!-- Seat selection componet -->
-            <div class="right">
-                <div style="text-align:center;">Booked seats</div>
-                <div class="screen-container" style="width: 20%; margin-left: auto; margin-right: auto;">Screen</div>
+
+        <div class="container-left">
+
+            <div>User Details</div>
+            <form class="booking-submit-form" method="post" action="Backend/insertBooking.php">
+                <div>
+                    <!-- Autofilled if logged in -->
+                    <input type="email" placeholder="email" value="" />
+                </div>
+                <!-- If is logged in show these fields -->
+                <div>
+                    Username:
+                </div>
+                <div>
+                    ID:
+                </div>
+                <div>
+                    <input type="submit" value="Book" />
+                </div>
+            </form>
+
+
+
+
+
+            <button onclick="history.back()">Go Back</button>
+        </div>
+        <!-- Seat selection component -->
+        <div class="container-right">
+            <div class="seat-container">
+                <div style="text-align:center; font-size: xx-large;">Booked Seats</div>
+                <div class="screen-container">Screen</div>
                 <table style="text-align: center; display: flex; justify-content: center;">
                     <?php
+                    $conn = connectDB();
                     $row_count = 5;
                     $seat_per_row = 10;
                     $checked_seat = [];
+                    $seat_size = 32;
+                    $show_id = isset($_POST["show_id"]) ? $_POST["show_id"] : null;
+                    $booked_seats = getBookedSeatArray($conn, $show_id);
+
                     echo "<tbody>";
                     for ($row = 0; $row < $row_count; $row++) {
                         $rowChar = chr($row + 65);
@@ -56,9 +90,11 @@ include "Backend/checkLogin.php";
                             $checkbox_name = "hidden-checkbox-" . $seat_id;
                             if (isset($_POST[$checkbox_name]) && ($_POST[$checkbox_name] == "on")) {
                                 $checked_seat[] = $seat_id;
-                                echo "<td style='width: 16px; height: 16px; background-color: red;'></td>";
+                                echo "<td style='width: $seat_size" . "px; height: $seat_size" . "px; background-color: #FF4040;'></td>";
+                            } else if (in_array($seat_id, $booked_seats)) {
+                                echo "<td style='width: $seat_size" . "px; height: $seat_size" . "px; background-color: #434343;'></td>";
                             } else {
-                                echo "<td style='width: 16px; height: 16px; background-color: gray;'></td>";
+                                echo "<td style='width: $seat_size" . "px; height: $seat_size" . "px; background-color: gray;'></td>";
                             }
                         }
                         echo "</tr>";
@@ -69,23 +105,39 @@ include "Backend/checkLogin.php";
                     }
                     echo "</tr>";
                     echo "</tbody>";
+                    $conn->close();
                     ?>
                 </table>
             </div>
+
+            <table class="total-table">
+                <tr>
+                    <th class="detail-column">Description</th>
+                    <th>Total</th>
+                </tr>
+                <tr>
+                    <td class="detail-column">seat id</td>
+                    <td>seat price</td>
+                </tr>
+                <tr>
+                    <td class="detail-column">Total</td>
+                    <td>15</td>
+                </tr>
+            </table>
+
         </div>
+
     </main>
 
     <footer>
         <div class="footer-container">
-            <div>
+            <div class="footer-left-panel">
                 <p>&copy; JhaMil Theatre</p>
             </div>
-            <div>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                </ul>
+            <div class="footer-right-panel">
+                <div><a href="#">Privacy Policy</a></div>
+                <div><a href="#">Terms of Service</a></div>
+                <div><a href="#">Contact Us</a></div>
             </div>
         </div>
     </footer>
@@ -108,22 +160,7 @@ include "Backend/checkLogin.php";
 
                     seat.setAttribute("id", `external-checkbox-${String.fromCharCode(row + asciiOffset)}${seatNum}`);
                     seat.style = "width: 16px; height: 16px; background-color: gray;";
-                    // if(seat is in POST){
-                    //     seat.style = "width: 16px; height: 16px; background-color: red;";
-                    // } else {
 
-                    // }
-
-
-                    // seat.setAttribute("type", "checkbox");
-                    // seat.setAttribute("name", `external-checkbox-${String.fromCharCode(row + asciiOffset)}${seatNum}`)
-                    // seat.setAttribute("class", "seat-checkbox");
-                    // seat.disabled = true;
-                    // const label = document.createElement("label");
-                    // label.setAttribute("for", seat.id);
-                    // const span = document.createElement("span");
-
-                    // label.appendChild(span);
                     cell.appendChild(seat)
                     // cell.appendChild(label)
                     rowContainer.appendChild(cell);

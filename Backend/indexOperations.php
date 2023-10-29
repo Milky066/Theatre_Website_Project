@@ -2,6 +2,12 @@
 include 'connectDB.php';
 
 
+function fillCardsByGenre(): void
+{
+  $genre = "adventure";
+  $query = "SELECT * FROM movies WHERE movies.genre LIKE '%$genre%';";
+}
+
 function FillShowCards(): void
 {
   $conn = connectDB();

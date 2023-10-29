@@ -41,17 +41,28 @@ include 'Backend/displayShow.php';
     <main>
         <div class="movie-container">
             <div class="movie-container-left">
+                <div class="movie-title">
+                    <?php
+                    displayTitle($conn, $show_id);
+                    ?>
+                </div>
                 <div>
                     <?php
                     displayImage($conn, $show_id);
                     ?>
                 </div>
                 <div>
+                    Rating:
                     <?php
                     displayRating($conn, $show_id);
                     ?>
                 </div>
-
+                <div>
+                    Showtime:
+                    <?php
+                    displayDate($conn, $show_id);
+                    ?>
+                </div>
                 <div>
                     <form id="hidden-form" action="confirmPage.php" method="post">
                         <!-- Populate by hidden input elements by the JS below -->
@@ -61,54 +72,55 @@ include 'Backend/displayShow.php';
                 </div>
             </div>
             <div class="movie-container-right">
-                <div>
-                    You have selected
-                </div>
-                <div>
-                    <?php
-                    displayDescription($conn, $show_id);
-                    ?>
-                </div>
-                <div>
-                    on
-            </div>
-            <div>
-                    <?php
-                    displayDate($conn, $show_id);
-                    ?>
-                </div>
-                <div>
-                    <!-- Seat selection componet -->
-                    <div>
-                        <div class="screen-container">Screen</div>
-                        <table class="seat-container" id="seat-container">
-                            <script>
-                                document.addEventListener("DOMContentLoaded", function() {
-                                    generateSeats();
-                                });
-                            </script>
-                        </table>
-                    </div>
-                </div>
+                <table>
+                    <tr>
+                        <th>Title</th>
+                        <td class="movie-title">
+                            <?php
+                            displayTitle($conn, $show_id);
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Synopsis</th>
+                        <td class="movie-description">
+                            <?php
+                            displayDescription($conn, $show_id);
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <!-- Seat selection componet -->
+                            <div>
+                                <div class="screen-container">Screen</div>
+                                <table class="seat-container" id="seat-container">
+                                    <script>
+                                        const seatString = "<?php getBookedSeatString($conn, $show_id); ?>";
+                                        const seatArr = seatString.split(",");
+                                        document.addEventListener("DOMContentLoaded", function() {
+                                            generateSeats(seats = seatArr);
+                                        });
+                                    </script>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
-        <!-- <?php
-                $show_id = $_GET['show_id'];
-                echo "Show ID: " . $show_id;
-                ?> -->
     </main>
 
     <footer>
         <div class="footer-container">
-            <div>
+            <div class="footer-left-panel">
                 <p>&copy; JhaMil Theatre</p>
             </div>
-            <div>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                </ul>
+            <div class="footer-right-panel">
+                <div><a href="#">Privacy Policy</a></div>
+                <div><a href="#">Terms of Service</a></div>
+                <div><a href="#">Contact Us</a></div>
             </div>
         </div>
     </footer>
@@ -124,45 +136,58 @@ include 'Backend/displayShow.php';
             document.getElementById('myForm').submit();
         }
 
-        function generateSeats(rowNum = 5, rowCap = 10, hiddenFormId = "hidden-form", seatContainerId = "seat-container") {
+        function generateSeats(seats = [], rowNum = 5, rowCap = 10, hiddenFormId = "hidden-form", seatContainerId = "seat-container") {
             const seatContainer = document.getElementById(seatContainerId);
             const hiddenForm = document.getElementById(hiddenFormId);
+            console.log(seats);
             for (let row = 0; row < rowNum; row++) {
                 const rowContainer = document.createElement("tr");
                 const rowHeader = document.createElement("td");
                 const asciiOffset = 65;
+
+                // Row names
                 rowHeader.textContent = String.fromCharCode(row + asciiOffset);
                 rowContainer.setAttribute("class", "row-container");
                 rowContainer.setAttribute("id", `row-${row}`);
                 rowContainer.appendChild(rowHeader);
                 for (let seatNum = 0; seatNum < rowCap; seatNum++) {
                     const cell = document.createElement("td");
-                    const seat = document.createElement("input");
-                    seat.setAttribute("type", "checkbox");
-                    seat.setAttribute("id", `external-checkbox-${String.fromCharCode(row + asciiOffset)}${seatNum}`);
-                    seat.setAttribute("name", `external-checkbox-${String.fromCharCode(row + asciiOffset)}${seatNum}`)
-                    seat.setAttribute("class", "seat-checkbox");
-                    seat.setAttribute("onchange", 'updateInternalInput(this)');
-                    const label = document.createElement("label");
-                    label.setAttribute("for", seat.id);
-                    const span = document.createElement("span");
 
-                    label.appendChild(span);
-                    cell.appendChild(seat)
-                    cell.appendChild(label)
+                    const rowId = String.fromCharCode(row + asciiOffset) + seatNum;
+                    if (seats.includes(rowId)) {
+                        console.log(rowId)
+                        const filledSeat = document.createElement("div")
+                        filledSeat.setAttribute("class", "seat-checkbox-booked");
+                        cell.appendChild(filledSeat);
+                    } else {
+                        const seat = document.createElement("input");
+                        seat.setAttribute("type", "checkbox");
+                        seat.setAttribute("id", `external-checkbox-${rowId}`);
+                        seat.setAttribute("name", `external-checkbox-${rowId}`)
+                        seat.setAttribute("class", "seat-checkbox");
+                        seat.setAttribute("onchange", 'updateInternalInput(this)');
+                        const label = document.createElement("label");
+                        label.setAttribute("for", seat.id);
+                        const span = document.createElement("span");
+                        label.appendChild(span);
+                        cell.appendChild(seat);
+                        cell.appendChild(label);
+
+                        const hiddenInput = document.createElement("input");
+                        hiddenInput.setAttribute("id", `hidden-checkbox-${rowId}`);
+                        hiddenInput.setAttribute("name", `hidden-checkbox-${rowId}`)
+                        hiddenInput.style = "display: none;";
+                        hiddenForm.appendChild(hiddenInput);
+                    }
                     rowContainer.appendChild(cell);
-
-                    const hiddenInput = document.createElement("input");
-                    hiddenInput.setAttribute("id", `hidden-checkbox-${String.fromCharCode(row + asciiOffset)}${seatNum}`);
-                    hiddenInput.setAttribute("name", `hidden-checkbox-${String.fromCharCode(row + asciiOffset)}${seatNum}`)
-                    hiddenInput.style = "display: none;";
-                    hiddenForm.appendChild(hiddenInput);
                 }
                 seatContainer.appendChild(rowContainer);
             }
             const seatNumRow = document.createElement("tr");
             const cornerCell = document.createElement("td");
             seatNumRow.appendChild(cornerCell);
+
+            // Row numbers
             for (let seatNum = 0; seatNum < rowCap; seatNum++) {
                 const cell = document.createElement("td");
                 cell.textContent = seatNum;
@@ -173,10 +198,18 @@ include 'Backend/displayShow.php';
             const submitButton = document.createElement("input");
             submitButton.setAttribute("type", "submit");
             submitButton.setAttribute("value", "Proceed");
+            const showIdPost = document.createElement("input");
+            showIdPost.setAttribute("type", "hidden");
+            showIdPost.setAttribute("value", <?php echo $show_id; ?>);
+
+            showIdPost.setAttribute("name", "show_id");
+
+            hiddenForm.appendChild(showIdPost);
             hiddenForm.appendChild(submitButton);
         }
 
         function updateInternalInput(element) {
+            // If cell is not previously booked, generate checkbox, else div
             const internalId = /-[A-Z][0-9]/;
             const id = "hidden-checkbox" + internalId.exec(element.id)[0];
 
