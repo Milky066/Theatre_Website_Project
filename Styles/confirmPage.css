@@ -22,22 +22,25 @@ input[type="email"] {
     text-align: center;
 }
 
-input[type="submit"] {
-    text-align: center;
-    height: 40px;
-    width: 120px;
-    font-size: xx-large;
-}
 
 .screen-container {
-    width: 400px;
+    margin-top: 10px;
+    color: #c7c7c7;
+    background: #354e7d;
+    border-radius: 4px;
     margin-left: auto;
     margin-right: auto;
-    color: black;
+    width: 400px;
     text-align: center;
-    background: white;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    vertical-align: middle;
+    margin-bottom: 20px;
+}
+
+table {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    border-spacing: 4px;
 }
 
 .total-table {
@@ -66,6 +69,17 @@ input[type="submit"] {
 main {
     display: flex;
     width: 100%;
+}
+
+input[type="submit"], button, input {
+    background-color: #F99417;
+    font-size: large;
+    border-radius: 6px;
+    border-style: none;
+    padding: 8px 24px 8px 24px;
+    cursor: pointer;
+    margin: 20px 2px 10px 2px;
+    transition: 0.5s ease-in-out;
 }
 
 /* .booking-submit-form {

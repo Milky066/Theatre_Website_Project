@@ -2,13 +2,25 @@
 include "Backend/checkLogin.php";
 include 'Backend/displayShow.php';
 include 'Backend/connectDB.php';
+include "Backend/userUtils.php";
+include "Backend/showUtils.php";
 
+$conn = connectDB();
 $booked_seats = $_POST["booked_seats"];
 $show_page = $_POST["show_page"];
+$show_id = $_POST["show_id"];
+$price = getPriceByShowId($conn, $show_id);
+
+$username = null;
+$email = null;
 // var_dump($booked_seats);
 if ($booked_seats <= 0) {
     echo "<script>alert('Seat not selected!'); history.go(-1);</script>";
     exit;
+}
+if ($user_id != null) {
+    $username = getUsername($conn, $user_id);
+    $email = getUserEmail($conn, $user_id);
 }
 ?>
 <!DOCTYPE html>
@@ -53,28 +65,20 @@ if ($booked_seats <= 0) {
             <form class="booking-submit-form" method="post" action="Backend/insertBooking.php">
                 <div>
                     <!-- Autofilled if logged in -->
-                    <input type="email" placeholder="email" value="" />
+                    <?php echo "<input type='email' placeholder='email' value='$email'></input>" ?>
                 </div>
-                <!-- If is logged in show these fields -->
-                <div>
-                    Username:
-                </div>
-                <div>
-                    ID:
-                </div>
+                <?php
+                if (isset($user_id)) {
+                    echo "<div>Username: $username</div>";
+                }
+                ?>
                 <div>
                     <input type="submit" value="Book" />
                 </div>
             </form>
-
-
-
-
-
             <button onclick="cancel()">Cancel</button>
             <script>
                 function cancel() {
-
                     window.location.href = "http://localhost/theatre_Website_Project";
                 }
             </script>
@@ -85,7 +89,7 @@ if ($booked_seats <= 0) {
             <div class="seat-container">
                 <div style="text-align:center; font-size: xx-large;">Booked Seats</div>
                 <div class="screen-container">Screen</div>
-                <table style="text-align: center; display: flex; justify-content: center;">
+                <table>
                     <?php
                     $conn = connectDB();
                     $row_count = 5;
@@ -101,16 +105,15 @@ if ($booked_seats <= 0) {
                         echo "<tr>";
                         echo "<td>$rowChar</td>";
                         for ($seat = 0; $seat < $seat_per_row; $seat++) {
-
                             $seat_id = chr(65 + $row) . $seat;
                             $checkbox_name = "hidden-checkbox-" . $seat_id;
                             if (isset($_POST[$checkbox_name]) && ($_POST[$checkbox_name] == "on")) {
                                 $checked_seat[] = $seat_id;
-                                echo "<td style='width: $seat_size" . "px; height: $seat_size" . "px; background-color: #FF4040;'></td>";
+                                echo "<td style='width: $seat_size" . "px; height: $seat_size" . "px; background-color: #F99417;'></td>";
                             } else if (in_array($seat_id, $booked_seats)) {
                                 echo "<td style='width: $seat_size" . "px; height: $seat_size" . "px; background-color: #434343;'></td>";
                             } else {
-                                echo "<td style='width: $seat_size" . "px; height: $seat_size" . "px; background-color: gray;'></td>";
+                                echo "<td style='width: $seat_size" . "px; height: $seat_size" . "px; background-color: #4D4C7D;'></td>";
                             }
                         }
                         echo "</tr>";
@@ -125,19 +128,29 @@ if ($booked_seats <= 0) {
                     ?>
                 </table>
             </div>
-
             <table class="total-table">
                 <tr>
-                    <th class="detail-column">Description</th>
-                    <th>Total</th>
+                    <th class="detail-column">Seats</th>
+                    <th>Prices</th>
                 </tr>
-                <tr>
-                    <td class="detail-column">seat id</td>
-                    <td>seat price</td>
-                </tr>
+                <?php
+                foreach ($checked_seat as $seat) {
+                    echo "<tr>
+                        <td>$seat</td>
+                        <td>$price</td>
+                    </tr>";
+                }
+
+                ?>
+
                 <tr>
                     <td class="detail-column">Total</td>
-                    <td>15</td>
+                    <td>
+                        <?php
+                        $total = $price * count($checked_seat);
+                        echo $total;
+                        ?>
+                    </td>
                 </tr>
             </table>
 
