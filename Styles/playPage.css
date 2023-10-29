@@ -17,6 +17,8 @@
     justify-content: center;
 }
 
+
+
 .movie-container-right {
     background-color: rgb(120, 120, 120);
     width: 70%;
@@ -28,12 +30,38 @@
 }
 
 .movie-title {
-    font-size: xx-large;
+    font-size: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
+.rating {
+    font-size: large;
+}
+
+.rating, .showtime {
+    font-size: x-large;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .movie-description {
     font-size: large;
+}
+
+.submit-button {
+    font-size: large;
+    border-radius: 6px;
+    border-style: none;
+    padding: 8px 16px 8px 16px;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+
+.submit-button:hover {
+    color: #111827;
+    background-color: #FCD34D;
+    transition: 0.5s ease-in-out;
 }
 
 .screen-container {

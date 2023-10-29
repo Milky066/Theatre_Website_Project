@@ -1,7 +1,7 @@
 .movie-card {
     width: 200px;
     height: fit-content;
-    background-color: rgb(74, 74, 74);
+    background-color: rgb(51 65 85);
     margin: 15px;
     text-align: center;
     padding-top: 1rem;
@@ -16,6 +16,16 @@
 .movie-card:hover {
     transition: 0.5s ease-in-out;
     opacity: 50%;
+}
+
+.movie-title {
+    font-size: large;
+    color: rgb(234 88 12);
+}
+
+.movie-description {
+    padding: 1rem;
+    color: rgb(202 138 4);
 }
 
 img {

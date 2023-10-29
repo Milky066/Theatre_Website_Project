@@ -121,7 +121,7 @@ function FillShowCards($conn): void
       <div style='
       width: 200px; 
       height: 300px; 
-      background-color: gray; 
+      background-color: rgb(51 65 85); 
       margin: 15px; 
       text-align: center; 
       padding-top: 1rem; 

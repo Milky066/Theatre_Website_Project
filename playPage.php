@@ -46,22 +46,22 @@ include 'Backend/displayShow.php';
                     displayTitle($conn, $show_id);
                     ?>
                 </div>
-                <div>
+                <div class="image">
                     <?php
                     displayImage($conn, $show_id);
                     ?>
                 </div>
-                <div>
+                <div class="rating">
                     Rating:
                     <?php
                     displayRating($conn, $show_id);
                     ?>
                 </div>
-                <div>
-                    Showtime:
-                    <?php
-                    displayDate($conn, $show_id);
-                    ?>
+                <div class="showtime">
+                    Showtime: <b>
+                        <?php
+                        displayDate($conn, $show_id);
+                        ?></b>
                 </div>
                 <div>
                     <form id="hidden-form" action="confirmPage.php" method="post">
@@ -100,7 +100,10 @@ include 'Backend/displayShow.php';
                                         const seatString = "<?php getBookedSeatString($conn, $show_id); ?>";
                                         const seatArr = seatString.split(",");
                                         document.addEventListener("DOMContentLoaded", function() {
+
                                             generateSeats(seats = seatArr);
+                                            resetCheckboxes();
+
                                         });
                                     </script>
                                 </table>
@@ -126,20 +129,24 @@ include 'Backend/displayShow.php';
     </footer>
 
     <script>
+        let bookedSeats = 0;
+
         function updateExternalInput(inputId, value) {
             // Update the value of the corresponding hidden input field
             document.getElementById(inputId).value = value;
         }
 
-        function submitFormWithExternalInputs() {
-            // Manually submit the form
-            document.getElementById('myForm').submit();
+        function resetCheckboxes() {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = false;
+            });
         }
 
         function generateSeats(seats = [], rowNum = 5, rowCap = 10, hiddenFormId = "hidden-form", seatContainerId = "seat-container") {
             const seatContainer = document.getElementById(seatContainerId);
             const hiddenForm = document.getElementById(hiddenFormId);
-            console.log(seats);
+            console.log("Booked seats: " + seats);
             for (let row = 0; row < rowNum; row++) {
                 const rowContainer = document.createElement("tr");
                 const rowHeader = document.createElement("td");
@@ -155,7 +162,7 @@ include 'Backend/displayShow.php';
 
                     const rowId = String.fromCharCode(row + asciiOffset) + seatNum;
                     if (seats.includes(rowId)) {
-                        console.log(rowId)
+                        // console.log(rowId)
                         const filledSeat = document.createElement("div")
                         filledSeat.setAttribute("class", "seat-checkbox-booked");
                         cell.appendChild(filledSeat);
@@ -198,12 +205,26 @@ include 'Backend/displayShow.php';
             const submitButton = document.createElement("input");
             submitButton.setAttribute("type", "submit");
             submitButton.setAttribute("value", "Proceed");
+            submitButton.setAttribute("class", "submit-button");
             const showIdPost = document.createElement("input");
             showIdPost.setAttribute("type", "hidden");
             showIdPost.setAttribute("value", <?php echo $show_id; ?>);
-
             showIdPost.setAttribute("name", "show_id");
 
+            const bookedAmount = document.createElement("input");
+            bookedAmount.setAttribute("type", "hidden");
+            bookedAmount.setAttribute("value", bookedSeats);
+            bookedAmount.setAttribute("id", "booked_seats");
+            bookedAmount.setAttribute("name", "booked_seats");
+
+            const showPage = document.createElement("input");
+            showPage.setAttribute("type", "hidden");
+            showPage.setAttribute("value", window.location.href);
+            showPage.setAttribute("id", "show_page");
+            showPage.setAttribute("name", "show_page");
+
+            hiddenForm.appendChild(showPage);
+            hiddenForm.appendChild(bookedAmount);
             hiddenForm.appendChild(showIdPost);
             hiddenForm.appendChild(submitButton);
         }
@@ -213,10 +234,20 @@ include 'Backend/displayShow.php';
             const internalId = /-[A-Z][0-9]/;
             const id = "hidden-checkbox" + internalId.exec(element.id)[0];
 
-            const hiddenInputElement = document.getElementById(id);
-            hiddenInputElement.checked = element.checked;
-            hiddenInputElement.checked ? hiddenInputElement.value = "on" : hiddenInputElement.value = "off";
 
+            const hiddenInputElement = document.getElementById(id);
+            const bookedSeat = document.getElementById("booked_seats");
+            hiddenInputElement.checked = element.checked;
+            if (hiddenInputElement.checked) {
+                hiddenInputElement.value = "on";
+                bookedSeats++;
+            } else {
+                hiddenInputElement.value = "off";
+                bookedSeats--;
+            }
+            // hiddenInputElement.checked ? hiddenInputElement.value = "on" : hiddenInputElement.value = "off";
+            console.log("Booked seat: " + bookedSeats);
+            bookedSeat.value = bookedSeats;
             // console.log(hiddenInputElement.checked);
         }
 

@@ -3,8 +3,6 @@
 
 }
 
-
-
 header {
   font-size: xx-large;
   height: 15%;
@@ -21,13 +19,13 @@ main {
 
 a {
   text-decoration: none;
-  color: white;
+  color: #F99417;
   cursor: pointer;
   transition: 0.5s ease-in-out;
 }
 
 a:hover {
-  color: #1ddcd0;
+  color: white;
   transition: 0.5s ease-in-out;
 }
 
@@ -36,8 +34,8 @@ body {
   margin: 0px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #ccc;
-  background-color: #111;
+  color: #F99417;
+  background-color: rgb(15 23 42);
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -97,8 +95,6 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: black;
-  color: white;
 }
 
 .navbar-right-panel {
@@ -111,19 +107,27 @@ body {
 .navbar-right-panel div {
   margin-left: 4px;
   margin-right: 4px;
-
+  border: none;
+  border-radius: 6px;
+  background-color: rgb(30 41 59);
+  padding: 6px 12px 6px 12px;
+  transition: 0.5s ease-in-out;
 }
+
+.navbar-right-panel div:hover {
+  transition: 0.5s ease-in-out;
+  background-color: rgb(234 88 12);
+}
+
+
 
 .navbar-left-panel {
   width: max-content;
   font-size: xxx-large;
-
-
+  padding-left: 20px;
 }
 
 footer {
-  background-color: black;
-  color: white;
   height: 10%;
   text-align: center;
 }
@@ -137,6 +141,7 @@ footer {
 
 .footer-left-panel {
   font-size: large;
+  padding-left: 20px;
 }
 
 .footer-right-panel div {
@@ -147,4 +152,26 @@ footer {
 .footer-right-panel {
   display: flex;
   flex-direction: row;
+}
+
+
+/* Scroolbar style */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #4D4C7D;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #F99417;
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #F99417;
 }

@@ -60,8 +60,8 @@ function FillShowCards(): void
       <div style='margin: auto'>
       <img src='$row[image]' alt='$row[show_id]' width='auto' height='auto' style='max-width:200px; max-height:200px;'/>
       </div>
-      <div style='padding: 1rem;'>
-          <div>
+      <div style=''>
+          <div class='movie-title'>
               <b>$row[title]</b>
           </div>
           <div>

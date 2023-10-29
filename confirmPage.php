@@ -2,6 +2,14 @@
 include "Backend/checkLogin.php";
 include 'Backend/displayShow.php';
 include 'Backend/connectDB.php';
+
+$booked_seats = $_POST["booked_seats"];
+$show_page = $_POST["show_page"];
+// var_dump($booked_seats);
+if ($booked_seats <= 0) {
+    echo "<script>alert('Seat not selected!'); history.go(-1);</script>";
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +70,14 @@ include 'Backend/connectDB.php';
 
 
 
-            <button onclick="history.back()">Go Back</button>
+            <button onclick="cancel()">Cancel</button>
+            <script>
+                function cancel() {
+
+                    window.location.href = "http://localhost/theatre_Website_Project";
+                }
+            </script>
+
         </div>
         <!-- Seat selection component -->
         <div class="container-right">
@@ -142,43 +157,6 @@ include 'Backend/connectDB.php';
         </div>
     </footer>
 
-    <script>
-        function generateSeatsReadOnly(rowNum = 5, rowCap = 10, seatContainerId = "seat-container") {
-            const seatContainer = document.getElementById(seatContainerId);
-            for (let row = 0; row < rowNum; row++) {
-                const rowContainer = document.createElement("tr");
-                const rowHeader = document.createElement("td");
-                const asciiOffset = 65;
-                rowHeader.textContent = String.fromCharCode(row + asciiOffset);
-                rowContainer.setAttribute("class", "row-container");
-                rowContainer.setAttribute("id", `row-${row}`);
-                rowContainer.appendChild(rowHeader);
-                for (let seatNum = 0; seatNum < rowCap; seatNum++) {
-                    const cell = document.createElement("td");
-                    const seat = document.createElement("div");
-
-
-                    seat.setAttribute("id", `external-checkbox-${String.fromCharCode(row + asciiOffset)}${seatNum}`);
-                    seat.style = "width: 16px; height: 16px; background-color: gray;";
-
-                    cell.appendChild(seat)
-                    // cell.appendChild(label)
-                    rowContainer.appendChild(cell);
-                }
-                seatContainer.appendChild(rowContainer);
-            }
-            const seatNumRow = document.createElement("tr");
-            const cornerCell = document.createElement("td");
-            seatNumRow.appendChild(cornerCell);
-            for (let seatNum = 0; seatNum < rowCap; seatNum++) {
-                const cell = document.createElement("td");
-                cell.textContent = seatNum;
-                cell.style = "text-align: center;";
-                seatNumRow.appendChild(cell);
-            }
-            seatContainer.appendChild(seatNumRow);
-        }
-    </script>
 </body>
 
 </html>
