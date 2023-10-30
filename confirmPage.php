@@ -32,6 +32,7 @@ if ($user_id != null) {
     <title>play</title>
     <link href="Styles/global.css" rel="stylesheet" />
     <link href="Styles/confirmPage.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 
 <body>
@@ -55,23 +56,40 @@ if ($user_id != null) {
         </nav>
         <div class="separator"></div>
     </header>
-
     <main>
-
-
         <div class="container-left">
-
             <div>User Details</div>
             <form class="booking-submit-form" method="post" action="Backend/insertBooking.php">
                 <div>
                     <!-- Autofilled if logged in -->
-                    <?php echo "<input type='email' placeholder='email' value='$email'></input>" ?>
+                    <?php echo "<input type='email' placeholder='email' name='email' value='$email' required></input>" ?>
+                    <?php echo "<input type='hidden' name='show_id' value='$show_id'/>" ?>
                 </div>
                 <?php
                 if (isset($user_id)) {
                     echo "<div>Username: $username</div>";
                 }
                 ?>
+                <div class="seat-containers">
+                    <?php
+                    $row_count = 5;
+                    $seat_per_row = 10;
+                    $selected_seats = [];
+                    for ($row = 0; $row < $row_count; $row++) {
+                        $rowChar = chr($row + 65);
+                        for ($seat = 0; $seat < $seat_per_row; $seat++) {
+                            $seat_id = chr(65 + $row) . $seat;
+                            $checkbox_name = "hidden-checkbox-" . $seat_id;
+                            if (isset($_POST[$checkbox_name]) && ($_POST[$checkbox_name] == "on")) {
+                                $selected_seats[] = $seat_id;
+                            }
+                        }
+                    }
+                    foreach ($selected_seats as $seat) {
+                        echo "<input type='hidden' name='$seat' value='on'></input>";
+                    }
+                    ?>
+                </div>
                 <div>
                     <input type="submit" value="Book" />
                 </div>
@@ -82,7 +100,6 @@ if ($user_id != null) {
                     window.location.href = "http://localhost/theatre_Website_Project";
                 }
             </script>
-
         </div>
         <!-- Seat selection component -->
         <div class="container-right">
@@ -135,17 +152,16 @@ if ($user_id != null) {
                 </tr>
                 <?php
                 foreach ($checked_seat as $seat) {
-                    echo "<tr>
+                    echo "
+                    <tr>
                         <td>$seat</td>
-                        <td>$price</td>
+                        <td class='price-detail'>$price</td>
                     </tr>";
                 }
-
                 ?>
-
                 <tr>
-                    <td class="detail-column">Total</td>
-                    <td>
+                    <td class="total-column">Total</td>
+                    <td class="price-detail-total">
                         <?php
                         $total = $price * count($checked_seat);
                         echo $total;

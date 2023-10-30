@@ -16,6 +16,7 @@ $error_message = isset($_GET["error"]) ? $_GET["error"] : null;
     <title>Register</title>
     <link href="Styles/global.css" rel="stylesheet" />
     <link href="Styles/register.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 
 <body>

@@ -2,6 +2,10 @@
 include "Backend/checkLogin.php";
 include 'Backend/connectDB.php';
 include 'Backend/displayShow.php';
+
+$conn = connectDB();
+$show_id = $_GET['show_id'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,9 +13,14 @@ include 'Backend/displayShow.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>play</title>
+    <title>
+        <?php
+        displayTitle($conn, $show_id);
+        ?>
+    </title>
     <link href="Styles/global.css" rel="stylesheet" />
     <link href="Styles/playPage.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 
 <body>
@@ -35,10 +44,7 @@ include 'Backend/displayShow.php';
         </nav>
         <div class="separator"></div>
     </header>
-    <?php
-    $conn = connectDB();
-    $show_id = $_GET['show_id'];
-    ?>
+
     <main>
         <div class="movie-container">
             <div class="movie-container-left">

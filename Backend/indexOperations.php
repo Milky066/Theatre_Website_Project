@@ -53,7 +53,6 @@ function FillShowCards(): void
         window.location.href='playPage.php?show_id=' + show_id;
       }
       </script>";
-    // $rating = $row['rating'];
     echo "
       <div class='movie-card' onclick='onClick($row[show_id])'>
       <!-- Picture -->
@@ -65,16 +64,16 @@ function FillShowCards(): void
               <b>$row[title]</b>
           </div>
           <div>
-              Price: $row[price]
+              Price: <span>$row[price]</span>
           </div>
           <div>
-              Available Seat: $seat_available
+              Available Seat: <span>$seat_available</span>
           </div>
           <div>
-              Date: <b>$date</b>
+              Date: <span><b>$date</b></span>
           </div>
           <div>
-              Showtime: <b>$time</b>
+              Showtime: <span><b>$time</b></span>
           </div>
       </div>
       </div>

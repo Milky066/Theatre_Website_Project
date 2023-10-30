@@ -18,6 +18,10 @@
     opacity: 50%;
 }
 
+.movie-description span {
+    color: #ec986e;
+}
+
 .movie-title {
     font-size: large;
     color: rgb(234 88 12);

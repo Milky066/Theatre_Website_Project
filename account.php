@@ -23,6 +23,7 @@ $bookings = getBookingsByUser($conn, $user_id);
     <title><?php echo $username; ?></title>
     <link href="Styles/global.css" rel="stylesheet" />
     <link href="Styles/account.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 
 <body>

@@ -8,6 +8,7 @@ include "Backend/checkLogin.php";
   <meta charset="UTF-8">
   <link href="Styles/global.css" rel="stylesheet" />
   <link href="Styles/movieCard.css" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <title>Home</title>
 </head>
 

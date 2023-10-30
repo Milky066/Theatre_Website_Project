@@ -54,16 +54,43 @@ table {
     margin-right: auto;
     min-width: 80%;
     text-align: start;
+    padding: 10px 20px 10px 20px;
 }
 
 .total-table th {
     height: 40px;
     text-align: start;
     font-size: x-large;
+    padding: 10px 20px 10px 20px;
 }
 
-.detail-column {
-    width: 80%;
+.total-table td {
+    padding: 10px 20px 10px 20px;
+}
+
+.total-table tr:nth-child(odd) {
+    background-color: #192643;
+}
+
+.total-table tr:nth-child(even) {
+    background-color: #0f172a;
+}
+
+.detail-column, .total-column {
+    width: 200px;
+}
+
+.total-column {
+    font-size: x-large;
+
+}
+
+.price-detail, .price-detail-total {
+    color: #c7c7c7;
+}
+
+.price-detail-total {
+    font-weight: bolder;
 }
 
 main {

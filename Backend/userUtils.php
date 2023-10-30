@@ -31,3 +31,12 @@ function getUserEmail($conn, $user_id): string
     $query_result->free_result();
     return $user_email;
 }
+
+function getUserIdByEmail($conn, $user_email): string
+{
+    $query = "SELECT users.id FROM users WHERE users.email = $user_email";
+    $query_result = $conn->query($query);
+    $user_id = $query_result->fetch_row()[0];
+    $query_result->free_result();
+    return $user_id;
+}
