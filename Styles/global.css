@@ -32,6 +32,9 @@ a:hover {
 .separator {
   height: 2%;
   background: #F99417;
+  position: relative;
+  z-index: 10;
+  margin-top: 0px;
 }
 
 body {
@@ -135,8 +138,13 @@ input[tyoe="submit"] {
   transition: 0.5s ease-in-out;
 }
 
+<<<<<<< Updated upstream
 input[type="text"] {
   background-color:  rgb(15 23 42);
+=======
+input[type="text"], input[type="datetime-local"] {
+  background-color: rgb(13, 0, 69);
+>>>>>>> Stashed changes
   color: #F99417;
   font-size: large;
   border-radius: 4px;
@@ -144,6 +152,15 @@ input[type="text"] {
   border-color: #F99417 ;
   text-align: center;
   height: 40px;
+}
+
+textarea {
+  background-color: rgb(13, 0, 69);
+  color: #F99417;
+  font-size: large;
+  border-radius: 4px;
+  border-style: none;
+  text-align: center;
 }
 
 .search-container {

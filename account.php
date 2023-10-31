@@ -1,6 +1,7 @@
 <?php
 include "Backend/userUtils.php";
 include "Backend/connectDB.php";
+include "Backend/insertUtils.php";
 
 session_start();
 if (!isset($_SESSION["user_id"])) {
@@ -75,7 +76,23 @@ $isAdmin = $user_id == 1 ? true : false;
                             echo "<td>$values[title]</td>";
                             echo "<td>$values[seat_selected]</td>";
                             echo "<td>$values[time]</td>";
-                            echo "<td onclick='deleteBooking($values[id])' style='background-color: #a90303; cursor: pointer;color: #f5dada;''>Delete</td>";
+                            echo "
+                                <td style='background-color:#a73f11;'>
+                                <form action='Backend/deleteBooking.php' method='post'>
+                                <input type='hidden' name='booking-id' value='$values[id]'/>
+                                <input type='hidden' name='user-id' value='$user_id'/>
+                                <input 
+                                type='submit' 
+                                value='Delete' 
+                                style='background-color: transparent;
+                                cursor: pointer;
+                                color: #f5dada;
+                                border-width: 0px;
+                                font-size: larger;'
+                                onclick='return confirmDeleteBooking(`$values[title]`)'>
+                                </input>
+                                </form>
+                                </td>";
                             echo "</tr>";
                         }
 
@@ -84,15 +101,99 @@ $isAdmin = $user_id == 1 ? true : false;
                 </div>
             </div>
         </div>
+        <div class="separator-account"></div>
         <div class="insert-container">
-            <div class="insert-show-container">Create New Show</div>
-            <div class="insert-movie-container">Insert Movie</div>
+            <div class="insert-show-container">
+                <div class='insert-title'>Create New Show</div>
+                <form action="Backend/insertShow.php" method="post">
+                    <div>
+                        <label for="movie-id">Show: </label>
+                        <select name="movie-id" id="movie-id">
+                            <!-- Populate with names here -->
+                            <?php
+                            displayShowOptions($conn);
+                            ?>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="date">Date: </label>
+                        <input type="datetime-local" id="date" name="date" />
+                    </div>
+                    <div>
+                        <label for="price">Price: </label>
+                        <input type="text" id="price" name="price" />
+                    </div>
+                    <div>
+                        <input class="submit-button" type="submit" value="submit" />
+                    </div>
+
+                </form>
+            </div>
+            <div class="insert-movie-container">
+                <div class='insert-title'>Insert Movie</div>
+                <!--title, description, image, rating, genre, runtime -->
+                <form class="insert-movie-form" action="Backend/insertMovie.php" method="post">
+                    <div>
+                        <label for="title">Movie name:</label>
+                        <input type="text" id="title" name="title" />
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <label for="description" style="margin-right: 10px;">Description:</label>
+                        <textarea id="description" name="description" rows="4" cols="50"></textarea>
+                    </div>
+                    <div>
+                        <label for="rating">Rating: </label>
+                        <select name="rating" id="rating">
+                            <!-- Populate with names here -->
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="genre">Genre:</label>
+                        <input type="text" id="genre" name="genre" />
+                    </div>
+                    <div>
+                        <label for="runtime">Runtime:</label>
+                        <input type="text" id="runtime" name="runtime" />
+                    </div>
+                    <div>
+                        <label class="image-upload-button" for="image">Select image:</label>
+                        <input type="file" id="image" name="image" accept="image/*" onchange="convertImageToBase64(this)" />
+                    </div>
+                    <input type="hidden" id="image-base64" name="image-base64" />
+                    <input class="submit-button" type="submit">
+                </form>
+            </div>
         </div>
     </main>
 </body>
 <script>
-    function deleteBooking(bookingId) {
-        alert(`Do you want to delete booking: ${bookingId}?`);
+    function confirmDeleteBooking(booking) {
+        if (confirm(`Do you want to delete ${booking}?`)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function convertImageToBase64(element) {
+        const image = element.files[0];
+        const imageBase64 = document.getElementById("image-base64");
+        if (image) {
+            const fileReader = new FileReader();
+            fileReader.onload = function(event) {
+                // Base64 string updated to hidden element
+                imageBase64.value = event.target.result;
+            };
+            fileReader.readAsDataURL(image);
+        } else {
+            imageBase64.value = "";
+            console.log("No image uploaded");
+        }
     }
 </script>
 

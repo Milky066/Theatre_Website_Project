@@ -65,7 +65,7 @@ include "Backend/checkLogin.php";
                         echo "<div style='visibility:hidden; color: rgb(235, 0, 0);'>Incorret Email and/or Password</div>";
                     }
                     ?>
-                    <div class="forgot-password"><a href="">Forgot your password?</a></div>
+                    <div class="forgot-password"><a href="forgetPassword.php">Forgot your password?</a></div>
                 </div>
             </form>
             <p>Don't have an account? Click here to <span> <a href="register.html">sign up</a></span></p>

@@ -31,6 +31,15 @@ function displayDate($conn, $id): void
   echo $date;
 }
 
+function displayRuntime($conn, $id): void
+{
+  $query_result = $conn->query("SELECT movies.runtime FROM shows JOIN movies ON shows.movie_id = movies.id WHERE shows.id = $id;");
+
+  $runtime = $query_result->fetch_assoc()['runtime'];
+  $query_result->free_result();
+  echo $runtime;
+}
+
 function displayDescription($conn, $id): void
 {
   $query_result = $conn->query("SELECT movies.description FROM shows JOIN movies ON movies.id = shows.movie_id WHERE shows.id = $id;");

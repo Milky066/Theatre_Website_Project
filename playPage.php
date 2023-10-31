@@ -70,6 +70,13 @@ $show_id = $_GET['show_id'];
                         displayDate($conn, $show_id);
                         ?></b>
                 </div>
+                <div class="runtime">
+                    Runtime: <b>
+                        <?php
+                        displayRuntime($conn, $show_id);
+                        ?></b>
+                    minutes
+                </div>
                 <div>
                     <form id="hidden-form" action="confirmPage.php" method="post">
                         <!-- Populate by hidden input elements by the JS below -->
