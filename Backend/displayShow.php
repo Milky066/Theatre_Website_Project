@@ -155,7 +155,6 @@ function FillShowCards($conn): void
           </div>
       </div>
       </div>
-      
       ";
     $count += 1;
   }

@@ -47,13 +47,15 @@ $conn = connectDB();
       <input name="search" id="search" type="text" placeholder="search for movie" oninput="refreshMovieList(this)"></input>
       <label for="genre">Genre</label>
       <select name="genre" id="genre" onchange="refreshMovieList(this)">
-        <option value="all">All</option>
-        <option value="action">Action</option>
-        <option value="adventure">Adventure</option>
-        <option value="drama">Drama</option>
-        <option value="fantasy">Fantasy</option>
-        <option value="romance">Romance</option>
-        <option value="comedy">Comedy</option>
+        <option value="none">none</option>
+        <option value="action">action</option>
+        <option value="adventure">adventure</option>
+        <option value="drama">drama</option>
+        <option value="fantasy">fantasy</option>
+        <option value="romance">romance</option>
+        <option value="comedy">comedy</option>
+        <option value="fiction">fiction</option>
+        <option value="sci-fi">sci-fi</option>
       </select>
     </div>
     <div id="movie-card-container" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
@@ -91,7 +93,7 @@ $conn = connectDB();
           }
         })
       } else if (element.id === "genre") {
-        const genrePrompt = new RegExp(element.value);
+        const genrePrompt = new RegExp(element.value, "i");
         showCards.forEach((card) => {
           const genre = card.getAttribute("genre");
           if (element.value != "none") {

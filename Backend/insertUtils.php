@@ -1,5 +1,5 @@
 <?php
-function displayShowOptions($conn)
+function displayShowOptions($conn): void
 {
     // movie_id, time, price
     $query = "SELECT movies.title, movies.id FROM movies;";

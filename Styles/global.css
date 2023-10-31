@@ -4,7 +4,7 @@
 }
 
 header {
-  font-size: large;
+  font-size: xx-large;
   height: 15%;
 }
 
@@ -74,7 +74,7 @@ body {
   margin-right: 4px;
   border: none;
   border-radius: 6px;
-  /* background-color: rgb(30 41 59); */
+  background-color: rgb(30 41 59);
   padding: 6px 12px 6px 12px;
   transition: 0.5s ease-in-out;
 }
@@ -86,8 +86,8 @@ body {
 
 .navbar-left-panel {
   width: max-content;
-  font-size: xx-large;
-  padding-left: 30px;
+  font-size: xxx-large;
+  padding-left: 20px;
 }
 
 footer {
@@ -138,18 +138,12 @@ input[tyoe="submit"] {
   transition: 0.5s ease-in-out;
 }
 
-<<<<<<< Updated upstream
-input[type="text"] {
-  background-color:  rgb(15 23 42);
-=======
 input[type="text"], input[type="datetime-local"] {
   background-color: rgb(13, 0, 69);
->>>>>>> Stashed changes
   color: #F99417;
   font-size: large;
   border-radius: 4px;
-  border-width: 1px;
-  border-color: #F99417 ;
+  border-style: none;
   text-align: center;
   height: 40px;
 }
@@ -168,7 +162,7 @@ textarea {
   justify-content: center;
   align-items: center;
   margin: 20px auto 20px auto;
-  /* background: rgb(9 27 54); */
+  background: rgb(9 27 54);
   padding: 10px 30px 10px 30px;
   width: max-content;
   border-radius: 8px;
@@ -181,12 +175,11 @@ textarea {
 }
 
 select {
-  background-color: rgb(15 23 42);
+  background-color: rgb(13, 0, 69);
   color: #F99417;
   font-size: large;
   border-radius: 4px;
-  border-width: 1px;
-  border-color: #F99417 ;
+  border-width: 0px;
   margin-left: 20px;
   padding: 10px;
   height: 40px;

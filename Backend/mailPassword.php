@@ -1,10 +1,8 @@
 <?php
-// TODO: Check if the mail exists, if so send the password to the mail
-// Else return error message.
-// noEmailFound -> get variable
+
 include "connectDB.php";
 $conn = connectDB();
-// var_dump($_POST);
+
 $email = isset($_POST["email"]) ? $_POST["email"] : null;
 $query = "SELECT users.username, users.password FROM users WHERE users.email = '$email'";
 $query_result = $conn->query($query);
@@ -22,8 +20,8 @@ $mail_header = 'From: jhamiltheatre@localhost' . "\r\n" .
 
 $mail_subject = "Password Recovery";
 $mail_message = "Password Recovery" . "\n" .
-    "Username: $$result[username]" . "\n" .
-    "Password: $$result[password]";
+    "Username: $result[username]" . "\n" .
+    "Password: $result[password]";
 
 mail($email, $mail_subject, $mail_message, $mail_header, '-jhamiltheatre@localhost');
 echo ("<script>alert('Recovered password sent to $email');window.location.href='../index.php'</script>");
