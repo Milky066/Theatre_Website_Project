@@ -125,12 +125,10 @@ $show_id = $_GET['show_id'];
     <footer>
         <div class="footer-container">
             <div class="footer-left-panel">
-                <p>&copy; JhaMil Theatre</p>
+                <p>&copy;JhaMil Theatre</p>
             </div>
             <div class="footer-right-panel">
-                <div><a href="#">Privacy Policy</a></div>
-                <div><a href="#">Terms of Service</a></div>
-                <div><a href="#">Contact Us</a></div>
+                Best shows at Jhamil
             </div>
         </div>
     </footer>

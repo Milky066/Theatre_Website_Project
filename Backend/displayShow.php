@@ -77,9 +77,9 @@ function getBookedSeatArray($conn, $show_id): array
 
 function FillShowCards($conn): void
 {
-  $query_result = $conn->query("SELECT shows.id, shows.time, shows.price, movies.title, movies.description, movies.rating, movies.image FROM shows JOIN movies ON movies.id = shows.movie_id;");
+  $query_result = $conn->query("SELECT shows.id, shows.time, shows.price, movies.title, movies.description, movies.rating, movies.image, movies.genre FROM shows JOIN movies ON movies.id = shows.movie_id;");
   $seat_query_result = $conn->query("SELECT bookings.show_id FROM bookings");
-  $keys = ['show_id', 'time', 'price', 'title', 'description', 'rating', 'image', 'seat_booked'];
+  $keys = ['show_id', 'time', 'price', 'title', 'description', 'rating', 'image', 'genre', 'seat_booked'];
   $show_array = array();
   $booked_array = $seat_query_result->fetch_all(MYSQLI_ASSOC);
 
@@ -95,62 +95,59 @@ function FillShowCards($conn): void
             $seat_booked++;
           }
         }
+        // Add seat_booked key at the end of the original array
         $current_row[$keys[$i]] = $seat_booked;
       }
     }
     $show_array[] = $current_row;
   }
-
+  // var_dump($show_array);
   $query_result->free_result();
   $seat_query_result->free_result();
+  $conn->close();
 
-  // array here
+
+  $seat_cap = 50;
+  $count = 0;
   foreach ($show_array as $row) {
 
     $date_time = new DateTime($row['time']);
     $date = $date_time->format('D Y-m-d');
     $time = $date_time->format('H:i:s');
+    // var_dump($row['genre']);
+    $seat_available = $seat_cap - $row['seat_booked'];
     echo "
       <script>
       function onClick(show_id){
         window.location.href='playPage.php?show_id=' + show_id;
       }
       </script>";
-    // $rating = $row['rating'];
     echo "
-      <div style='
-      width: 200px; 
-      height: 300px; 
-      background-color: rgb(51 65 85); 
-      margin: 15px; 
-      text-align: center; 
-      padding-top: 1rem; 
-      padding-bottom: 1rem;
-      cursor: pointer:
-    ' onclick='onClick($row[show_id])'>
+      <div id='movie-card-$count' class='movie-card' onclick='onClick($row[show_id])' genre='$row[genre]' title='$row[title]'>
       <!-- Picture -->
       <div style='margin: auto'>
       <img src='$row[image]' alt='$row[show_id]' width='auto' height='auto' style='max-width:200px; max-height:200px;'/>
       </div>
-      <div style='padding: 1rem;'>
-          <div>
+      <div class='movie-description'>
+          <div class='movie-title'>
               <b>$row[title]</b>
           </div>
           <div>
-              Price: $row[price]
+              Price: <span>$row[price]</span>
           </div>
           <div>
-              Available Seat: $row[seat_booked]
+              Available Seat: <span>$seat_available</span>
           </div>
           <div>
-              Date: <b>$date</b>
+              Date: <span><b>$date</b></span>
           </div>
           <div>
-              Showtime: <b>$time</b>
+              Showtime: <span><b>$time</b></span>
           </div>
       </div>
       </div>
       
       ";
+    $count += 1;
   }
 }

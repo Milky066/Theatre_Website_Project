@@ -2,6 +2,12 @@
     font-size: large;
     margin-left: auto;
     margin-right: auto;
+
+}
+
+.booking-table-container {
+    overflow: auto;
+    height: 300px;
 }
 
 main {
@@ -87,4 +93,20 @@ tr:nth-child(even) {
 
 .account-container-right {
     width: 70%;
+}
+
+.insert-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin: 20px auto 20px auto;
+    font-size: larger;
+}
+
+.insert-show-container {
+    width: 50%;
+}
+
+.insert-movie-container {
+    width: 50%;
 }

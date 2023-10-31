@@ -112,6 +112,16 @@ footer {
 .footer-right-panel {
   display: flex;
   flex-direction: row;
+  padding-right: 20px;
+}
+
+.footer-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 50%;
+  visibility: hidden;
 }
 
 input[tyoe="submit"] {
@@ -126,10 +136,41 @@ input[tyoe="submit"] {
 }
 
 input[type="text"] {
-  background-color: #F99417;
+  background-color: rgb(13, 0, 69);
+  color: #F99417;
   font-size: large;
-  border-radius: 6px;
+  border-radius: 4px;
   border-style: none;
+  text-align: center;
+  height: 40px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto 20px auto;
+  background: rgb(9 27 54);
+  padding: 10px 30px 10px 30px;
+  width: max-content;
+  border-radius: 8px;
+}
+
+.search-container label {
+  font-size: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+select {
+  background-color: rgb(13, 0, 69);
+  color: #F99417;
+  font-size: large;
+  border-radius: 4px;
+  border-width: 0px;
+  margin-left: 20px;
+  padding: 10px;
+  height: 40px;
 }
 
 

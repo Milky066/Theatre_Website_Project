@@ -1,19 +1,12 @@
 <?php
 include 'connectDB.php';
 
-
-function fillCardsByGenre(): void
-{
-  $genre = "adventure";
-  $query = "SELECT * FROM movies WHERE movies.genre LIKE '%$genre%';";
-}
-
 function FillShowCards(): void
 {
   $conn = connectDB();
-  $query_result = $conn->query("SELECT shows.id, shows.time, shows.price, movies.title, movies.description, movies.rating, movies.image FROM shows JOIN movies ON movies.id = shows.movie_id;");
+  $query_result = $conn->query("SELECT shows.id, shows.time, shows.price, movies.title, movies.description, movies.rating, movies.image, movies.genre FROM shows JOIN movies ON movies.id = shows.movie_id;");
   $seat_query_result = $conn->query("SELECT bookings.show_id FROM bookings");
-  $keys = ['show_id', 'time', 'price', 'title', 'description', 'rating', 'image', 'seat_booked'];
+  $keys = ['show_id', 'time', 'price', 'title', 'description', 'rating', 'image', 'genre', 'seat_booked'];
   $show_array = array();
   $booked_array = $seat_query_result->fetch_all(MYSQLI_ASSOC);
 
@@ -29,12 +22,13 @@ function FillShowCards(): void
             $seat_booked++;
           }
         }
+        // Add seat_booked key at the end of the original array
         $current_row[$keys[$i]] = $seat_booked;
       }
     }
     $show_array[] = $current_row;
   }
-
+  // var_dump($show_array);
   $query_result->free_result();
   $seat_query_result->free_result();
   $conn->close();
@@ -46,6 +40,7 @@ function FillShowCards(): void
     $date_time = new DateTime($row['time']);
     $date = $date_time->format('D Y-m-d');
     $time = $date_time->format('H:i:s');
+    // var_dump($row['genre']);
     $seat_available = $seat_cap - $row['seat_booked'];
     echo "
       <script>
@@ -54,7 +49,7 @@ function FillShowCards(): void
       }
       </script>";
     echo "
-      <div class='movie-card' onclick='onClick($row[show_id])'>
+      <div class='movie-card' onclick='onClick($row[show_id])' genre='$row[genre]' title='$row[title]'>
       <!-- Picture -->
       <div style='margin: auto'>
       <img src='$row[image]' alt='$row[show_id]' width='auto' height='auto' style='max-width:200px; max-height:200px;'/>

@@ -13,6 +13,8 @@ $conn = connectDB();
 $username = getUsername($conn, $user_id);
 $user_email = getUserEmail($conn, $user_id);
 $bookings = getBookingsByUser($conn, $user_id);
+// user_id == 1 for administrator
+$isAdmin = $user_id == 1 ? true : false;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,31 +61,39 @@ $bookings = getBookingsByUser($conn, $user_id);
             <div class="account-container-right">
                 <div class="booking">Bookings</div>
                 <div class="booking-separator"></div>
-                <table class="booking-table">
-                    <tr>
-                        <th class="th-name">Name</th>
-                        <th>Seat</th>
-                        <th>Showtime</th>
-                    </tr>
+                <div class="booking-table-container">
+                    <table class="booking-table">
+                        <tr>
+                            <th class="th-name">Name</th>
+                            <th>Seat</th>
+                            <th colspan="2">Showtime</th>
+                        </tr>
 
-                    <?php
-                    foreach ($bookings as $key => $values) {
-                        echo "<tr>";
-                        echo "<td>$values[title]</td>";
-                        echo "<td>$values[seat_selected]</td>";
-                        echo "<td>$values[time]</td>";
-                        echo "</tr>";
-                    }
+                        <?php
+                        foreach ($bookings as $key => $values) {
+                            echo "<tr>";
+                            echo "<td>$values[title]</td>";
+                            echo "<td>$values[seat_selected]</td>";
+                            echo "<td>$values[time]</td>";
+                            echo "<td onclick='deleteBooking($values[id])' style='background-color: #a90303; cursor: pointer;color: #f5dada;''>Delete</td>";
+                            echo "</tr>";
+                        }
 
-                    ?>
-                </table>
-
+                        ?>
+                    </table>
+                </div>
             </div>
+        </div>
+        <div class="insert-container">
+            <div class="insert-show-container">Create New Show</div>
+            <div class="insert-movie-container">Insert Movie</div>
         </div>
     </main>
 </body>
 <script>
-
+    function deleteBooking(bookingId) {
+        alert(`Do you want to delete booking: ${bookingId}?`);
+    }
 </script>
 
 </html>
