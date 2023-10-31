@@ -4,7 +4,7 @@
 }
 
 header {
-  font-size: xx-large;
+  font-size: large;
   height: 15%;
 }
 
@@ -71,7 +71,7 @@ body {
   margin-right: 4px;
   border: none;
   border-radius: 6px;
-  background-color: rgb(30 41 59);
+  /* background-color: rgb(30 41 59); */
   padding: 6px 12px 6px 12px;
   transition: 0.5s ease-in-out;
 }
@@ -83,8 +83,8 @@ body {
 
 .navbar-left-panel {
   width: max-content;
-  font-size: xxx-large;
-  padding-left: 20px;
+  font-size: xx-large;
+  padding-left: 30px;
 }
 
 footer {
@@ -136,11 +136,12 @@ input[tyoe="submit"] {
 }
 
 input[type="text"] {
-  background-color: rgb(13, 0, 69);
+  background-color:  rgb(15 23 42);
   color: #F99417;
   font-size: large;
   border-radius: 4px;
-  border-style: none;
+  border-width: 1px;
+  border-color: #F99417 ;
   text-align: center;
   height: 40px;
 }
@@ -150,7 +151,7 @@ input[type="text"] {
   justify-content: center;
   align-items: center;
   margin: 20px auto 20px auto;
-  background: rgb(9 27 54);
+  /* background: rgb(9 27 54); */
   padding: 10px 30px 10px 30px;
   width: max-content;
   border-radius: 8px;
@@ -163,11 +164,12 @@ input[type="text"] {
 }
 
 select {
-  background-color: rgb(13, 0, 69);
+  background-color: rgb(15 23 42);
   color: #F99417;
   font-size: large;
   border-radius: 4px;
-  border-width: 0px;
+  border-width: 1px;
+  border-color: #F99417 ;
   margin-left: 20px;
   padding: 10px;
   height: 40px;
