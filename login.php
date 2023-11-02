@@ -44,7 +44,13 @@ include "Backend/checkLogin.php";
                             <label>Email</label>
                         </th>
                         <td>
-                            <input type="email" id="email" name="email" placeholder="Your email" required>
+                            <?php
+                            if (isset($_COOKIE["login_email"])) {
+                                echo "<input type='email' id='email' name='email' placeholder='Your email' value='$_COOKIE[login_email]' required>";
+                            } else {
+                                echo "<input type='email' id='email' name='email' placeholder='Your email' required>";
+                            }
+                            ?>
                         </td>
                     </tr>
                     <tr>
@@ -52,12 +58,23 @@ include "Backend/checkLogin.php";
                             <label>Password</label>
                         </th>
                         <td>
-                            <input type="password" id="password" name="password" placeholder="Enter password" required>
+                            <?php
+                            if (isset($_COOKIE["login_password"])) {
+                                echo "<input type='password' id='password' name='password' placeholder='Enter password' value='$_COOKIE[login_password]' required>";
+                            } else {
+                                echo "<input type='password' id='password' name='password' placeholder='Enter password' required>";
+                            }
+                            ?>
                         </td>
                     </tr>
                 </table>
                 <div class="submit">
                     <input type="submit" value="Log In">
+                    <div>
+                        <input id="remember-me" name="remember-me" type="checkbox" />
+                        <label for="remember-me">Remeber me</label>
+                    </div>
+
                     <?php
                     if (isset($_GET['isWrongPassword'])) {
                         echo "<div style='visibility:visible; color: rgb(235, 0, 0);'>Incorret Email and/or Password</div>";
@@ -68,6 +85,8 @@ include "Backend/checkLogin.php";
                     <div class="forgot-password"><a href="forgetPassword.php">Forgot your password?</a></div>
                 </div>
             </form>
+
+
             <p>Don't have an account? Click here to <span> <a href="register.html">sign up</a></span></p>
         </div>
     </main>
